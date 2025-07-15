@@ -1,0 +1,2 @@
+- init: Initial project setup and first memory entry
+- Added a Japanese language instruction: Always respond in Japanese when requested

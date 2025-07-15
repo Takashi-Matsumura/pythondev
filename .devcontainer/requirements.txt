@@ -1,0 +1,27 @@
+# コードフォーマッター
+black
+isort
+
+# リンター
+flake8
+pylint
+mypy
+
+# テストフレームワーク
+pytest
+pytest-cov
+
+# Jupyter notebook
+jupyter
+ipykernel
+
+# 一般的な開発ツール
+requests
+python-dotenv
+
+# ドキュメント生成
+sphinx
+
+# デバッグツール
+pdbpp
+ipdb
