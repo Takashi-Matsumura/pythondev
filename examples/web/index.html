@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello World App</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #1a1a2e;
+            color: #eee;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .container {
+            text-align: center;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            margin: 20px;
+        }
+        
+        h1 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #f39c12, #e74c3c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .subtitle {
+            font-size: 1.5em;
+            color: #bbb;
+            margin-bottom: 40px;
+        }
+        
+        .feature-box {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+        
+        .feature-box h2 {
+            color: #f39c12;
+            margin-bottom: 15px;
+        }
+        
+        .button-container {
+            margin-top: 30px;
+        }
+        
+        button {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.1em;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin: 10px;
+        }
+        
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(52, 152, 219, 0.4);
+        }
+        
+        #message {
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(46, 204, 113, 0.2);
+            border-radius: 10px;
+            font-size: 1.2em;
+            display: none;
+        }
+        
+        .emoji {
+            font-size: 2em;
+            margin: 0 10px;
+        }
+        
+        #counter {
+            font-size: 2em;
+            color: #f39c12;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Hello World!</h1>
+        <p class="subtitle">Pythonで作ったWebアプリケーション</p>
+        
+        <div class="feature-box">
+            <h2>🎯 インタラクティブな機能</h2>
+            <p>ボタンをクリックして、動的な変更を体験してください</p>
+            
+            <div class="button-container">
+                <button onclick="showMessage()">メッセージを表示</button>
+                <button onclick="changeColor()">色を変更</button>
+                <button onclick="incrementCounter()">カウントアップ</button>
+            </div>
+            
+            <div id="counter">カウント: 0</div>
+            <div id="message"></div>
+        </div>
+        
+        <div class="feature-box">
+            <h2>⏰ 現在時刻</h2>
+            <p id="clock" style="font-size: 1.5em; margin-top: 10px;"></p>
+        </div>
+    </div>
+    
+    <script>
+        let count = 0;
+        const messages = [
+            "こんにちは！Pythonの世界へようこそ 🐍",
+            "プログラミングは楽しい！ 💻",
+            "新しいことを学ぶのは素晴らしい 📚",
+            "あなたも開発者です！ 🚀"
+        ];
+        
+        function showMessage() {
+            const messageDiv = document.getElementById('message');
+            const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+            messageDiv.textContent = randomMessage;
+            messageDiv.style.display = 'block';
+            
+            // アニメーション効果
+            messageDiv.style.animation = 'none';
+            setTimeout(() => {
+                messageDiv.style.animation = 'fadeIn 0.5s ease-in';
+            }, 10);
+        }
+        
+        function changeColor() {
+            const colors = ['#e74c3c', '#3498db', '#2ecc71', '#f39c12', '#9b59b6'];
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            document.querySelector('h1').style.background = `linear-gradient(45deg, ${randomColor}, ${colors[(colors.indexOf(randomColor) + 1) % colors.length]})`;
+            document.querySelector('h1').style.webkitBackgroundClip = 'text';
+            document.querySelector('h1').style.webkitTextFillColor = 'transparent';
+            document.querySelector('h1').style.backgroundClip = 'text';
+        }
+        
+        function incrementCounter() {
+            count++;
+            document.getElementById('counter').textContent = `カウント: ${count}`;
+            
+            // 特定の数値で特別なメッセージ
+            if (count === 10) {
+                alert('10回達成！おめでとうございます！ 🎉');
+            }
+        }
+        
+        function updateClock() {
+            const now = new Date();
+            const timeString = now.toLocaleString('ja-JP', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+            });
+            document.getElementById('clock').textContent = timeString;
+        }
+        
+        // 初期化
+        updateClock();
+        setInterval(updateClock, 1000);
+    </script>
+    
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</body>
+</html>
